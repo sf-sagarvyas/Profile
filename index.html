@@ -638,11 +638,11 @@
             margin-left: -62px;
             /* lighting: shadow on spine side, bright face */
             background-image: linear-gradient(to right, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.06) 25%, transparent 55%);
-            transition: transform 0.42s cubic-bezier(0.34,1.56,0.64,1),
-                        background-color 0.28s ease,
+            transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
+                        background-color 0.3s ease,
                         background-image 0.3s ease,
-                        border-color 0.28s ease,
-                        box-shadow 0.28s ease;
+                        border-color 0.3s ease,
+                        box-shadow 0.3s ease;
             box-shadow: 6px 14px 32px rgba(0,0,0,0.14),
                         inset -2px 0 6px rgba(0,0,0,0.06);
             overflow: hidden;
@@ -672,10 +672,8 @@
         }
 
         .pcard:hover {
-            /* swing fully toward viewer + lift */
-            transform: rotateY(-6deg) rotateX(0deg) translateY(-68px);
-            background-color: var(--sf-blue) !important;
-            background-image: none;          /* remove depth gradient when face-on */
+            /* keep same angle — lift up and slightly forward */
+            transform: rotateY(-46deg) rotateX(6deg) translateY(-48px) translateZ(14px);
             border-color: var(--sf-blue-dark);
             box-shadow: 0 32px 64px rgba(1,118,211,0.42);
             z-index: 20;
@@ -1267,10 +1265,10 @@
         <h2 class="section-heading">Projects</h2>
         <p class="section-sub">Hover a file to preview — click to open the full project.</p>
 
-        <div class="pile-scene">
+        <div class="pile-scene reveal">
             <div class="project-pile">
 
-                <div class="pcard reveal" onclick="openProject(1)">
+                <div class="pcard" onclick="openProject(1)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
                         <h3>Org Health Dashboard</h3>
@@ -1279,7 +1277,7 @@
                     <span class="pcard-num">01</span>
                 </div>
 
-                <div class="pcard reveal" onclick="openProject(2)">
+                <div class="pcard" onclick="openProject(2)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
                         <h3>Multi-Org Sync Framework</h3>
@@ -1288,7 +1286,7 @@
                     <span class="pcard-num">02</span>
                 </div>
 
-                <div class="pcard reveal" onclick="openProject(3)">
+                <div class="pcard" onclick="openProject(3)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
                         <h3>Case Dependency Chain</h3>
@@ -1297,7 +1295,7 @@
                     <span class="pcard-num">03</span>
                 </div>
 
-                <div class="pcard reveal" onclick="openProject(4)">
+                <div class="pcard" onclick="openProject(4)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
                         <h3>Dealer Audit Framework</h3>
