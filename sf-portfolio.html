@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salesforce Solutions &mdash; Sagar Vyas</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fb; color: #1a1a2e; line-height: 1.6; }
+
+  .hero { background: #0f3460; color: white; padding: 56px 40px 48px; text-align: center; }
+  .hero h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .hero p { font-size: 16px; opacity: 0.75; max-width: 560px; margin: 0 auto; }
+  .hero .name { font-size: 13px; opacity: 0.6; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+
+  .project { background: white; border-radius: 16px; border: 1px solid #e8edf3; margin-bottom: 40px; overflow: hidden; }
+  .project-header { padding: 28px 32px 0; display: flex; align-items: flex-start; gap: 16px; }
+  .proj-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .proj-meta { flex: 1; }
+  .proj-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .proj-title { font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 6px; }
+  .proj-subtitle { font-size: 14px; color: #64748b; }
+  .github-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 6px; text-decoration: none; border: 1px solid; margin-top: 8px; }
+
+  .project-body { padding: 24px 32px 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .body-text { font-size: 14px; color: #374151; line-height: 1.7; }
+  .body-text + .body-text { margin-top: 10px; }
+
+  .kpi { border-radius: 10px; padding: 14px 16px; }
+  .kpi-value { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
+  .kpi-label { font-size: 12px; font-weight: 500; }
+
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin: 3px 3px 3px 0; }
+
+  .mockup-wrap { background: #f1f5f9; border-radius: 12px; padding: 16px; }
+  .mockup-bar { background: #0f3460; border-radius: 8px 8px 0 0; padding: 8px 14px; display: flex; align-items: center; gap: 6px; }
+  .mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .mockup-title { color: white; font-size: 11px; font-weight: 600; margin-left: 8px; opacity: 0.9; }
+  .mockup-body { background: white; border-radius: 0 0 8px 8px; padding: 14px; border: 1px solid #e2e8f0; border-top: none; }
+
+  .screen-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .tile { border-radius: 6px; padding: 10px 12px; flex: 1; }
+  .tile-val { font-size: 18px; font-weight: 700; }
+  .tile-lbl { font-size: 10px; font-weight: 500; margin-top: 2px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 11px; }
+  .bar-track { flex: 1; background: #f1f5f9; border-radius: 4px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+  .score-circle { width: 70px; height: 70px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 8px; }
+  .score-num { font-size: 20px; font-weight: 700; line-height: 1; }
+  .score-lbl { font-size: 9px; font-weight: 600; }
+
+  .flow-step { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px 10px; font-size: 11px; text-align: center; flex: 1; }
+  .flow-arrow { color: #94a3b8; font-size: 16px; align-self: center; }
+
+  .tab-row { display: flex; gap: 2px; margin-bottom: 10px; }
+  .tab { padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; }
+  .tab-active { background: #0f3460; color: white; }
+  .tab-inactive { background: #f1f5f9; color: #64748b; }
+  .q-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 11px; }
+  .yn-group { display: flex; gap: 4px; }
+  .yn-yes { background: #d1fae5; color: #065f46; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 10px; }
+  .yn-no  { background: #f1f5f9; color: #94a3b8; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 10px; }
+
+  .table-row { display: flex; gap: 8px; padding: 7px 0; border-bottom: 1px solid #f8fafc; font-size: 11px; align-items: center; }
+  .table-header { display: flex; gap: 8px; padding: 5px 0; border-bottom: 2px solid #e2e8f0; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+  .status-pill { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .s-approved { background: #d1fae5; color: #065f46; }
+  .s-pending  { background: #fef3c7; color: #92400e; }
+  .s-draft    { background: #f1f5f9; color: #64748b; }
+  .s-demoted  { background: #fee2e2; color: #991b1b; }
+
+  .dep-node { border-radius: 6px; padding: 7px 10px; font-size: 11px; font-weight: 600; text-align: center; }
+  .dep-blocked { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+  .dep-blocking { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+  .dep-free { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+  .dep-arrow { text-align: center; color: #94a3b8; font-size: 18px; }
+  .dep-label { font-size: 9px; color: #94a3b8; text-align: center; margin-top: 2px; }
+
+  .sync-box { border-radius: 8px; padding: 10px; font-size: 11px; font-weight: 600; text-align: center; }
+  .sync-arrow { text-align: center; font-size: 20px; color: #3b82f6; font-weight: 700; margin: 4px 0; }
+
+  .divider { height: 1px; background: #f1f5f9; margin: 20px 0; }
+
+  .footer { text-align: center; padding: 40px 24px; color: #94a3b8; font-size: 13px; }
+  .footer a { color: #0f3460; text-decoration: none; font-weight: 600; }
+
+  @media (max-width: 640px) {
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .project-header, .project-body { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="name">Salesforce Portfolio &mdash; Sagar Vyas</div>
+  <h1>Enterprise Salesforce Solutions</h1>
+  <p>Four production-ready solutions built for real enterprise problems &mdash; configurable, scalable, and deployed on the Salesforce platform.</p>
+</div>
+
+<div class="container">
+
+<!-- ======================================================= -->
+<!-- PROJECT 1: ORG HEALTH DASHBOARD -->
+<!-- ======================================================= -->
+<div class="project">
+  <div class="project-header">
+    <div class="proj-icon" style="background:#eff6ff">📊</div>
+    <div class="proj-meta">
+      <div class="proj-num" style="color:#1e40af">Project 01</div>
+      <div class="proj-title">Salesforce Org Health Dashboard</div>
+      <div class="proj-subtitle">Real-time org monitoring &amp; health scoring &mdash; no third-party tools required</div>
+      <a class="github-link" style="color:#1e40af;border-color:#bfdbfe;background:#eff6ff" href="https://github.com/sf-sagarvyas/sf-org-health-dashboard" target="_blank">
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="two-col">
+      <div>
+        <div class="section-label" style="color:#1e40af">The Business Challenge</div>
+        <p class="body-text">Salesforce administrators at large organisations have no built-in, centralised way to monitor their org's health in real time. They typically discover issues &mdash; API limits hit, runaway flows, orphaned automations &mdash; only after something breaks in production, costing hours of incident recovery and impacting business operations.</p>
+        <p class="body-text" style="margin-top:10px">Teams resort to expensive third-party monitoring tools or manual checks across disparate screens, with no historical record to spot trends.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#1e40af">Business Value</div>
+        <div class="three-col" style="margin-top:0">
+          <div class="kpi" style="background:#eff6ff">
+            <div class="kpi-value" style="color:#1e40af">0</div>
+            <div class="kpi-label" style="color:#1e5fa8">Third-party tools needed</div>
+          </div>
+          <div class="kpi" style="background:#f0fdf4">
+            <div class="kpi-value" style="color:#065f46">Early</div>
+            <div class="kpi-label" style="color:#166534">Warning system built-in</div>
+          </div>
+          <div class="kpi" style="background:#fffbeb">
+            <div class="kpi-value" style="color:#92400e">100%</div>
+            <div class="kpi-label" style="color:#78350f">Native Salesforce</div>
+          </div>
+        </div>
+
+        <p class="body-text" style="margin-top:4px">Admins get a single screen that surfaces every critical metric &mdash; governor limits, active automations, metadata counts &mdash; with a composite health score and historical snapshots. Problems are caught before they become outages.</p>
+
+        <div style="margin-top:14px">
+          <span class="tag" style="background:#eff6ff;color:#1e40af">LWC Dashboard</span>
+          <span class="tag" style="background:#eff6ff;color:#1e40af">Tooling API</span>
+          <span class="tag" style="background:#eff6ff;color:#1e40af">Limits API</span>
+          <span class="tag" style="background:#eff6ff;color:#1e40af">Historical Snapshots</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="color:#1e40af">What It Looks Like</div>
+        <div class="mockup-wrap">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Org Health Dashboard</div>
+          </div>
+          <div class="mockup-body">
+            <div class="screen-row">
+              <div class="tile" style="background:#d1fae5;text-align:center">
+                <div class="score-circle" style="background:#0f3460">
+                  <div class="score-num" style="color:white">84</div>
+                  <div class="score-lbl" style="color:rgba(255,255,255,0.7)">/100</div>
+                </div>
+                <div style="font-size:10px;font-weight:700;color:#065f46">HEALTHY</div>
+              </div>
+              <div style="flex:2">
+                <div style="font-size:10px;font-weight:700;color:#475569;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Governor Limits</div>
+                <div class="bar-row"><span style="width:90px;color:#374151">Daily API</span><div class="bar-track"><div class="bar-fill" style="width:34%;background:#22c55e"></div></div><span style="color:#475569;width:28px">34%</span></div>
+                <div class="bar-row"><span style="width:90px;color:#374151">Async Apex</span><div class="bar-track"><div class="bar-fill" style="width:61%;background:#f59e0b"></div></div><span style="color:#475569;width:28px">61%</span></div>
+                <div class="bar-row"><span style="width:90px;color:#374151">Bulk API</span><div class="bar-track"><div class="bar-fill" style="width:12%;background:#22c55e"></div></div><span style="color:#475569;width:28px">12%</span></div>
+                <div class="bar-row"><span style="width:90px;color:#374151">Emails</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#ef4444"></div></div><span style="color:#ef4444;width:28px;font-weight:700">88%</span></div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #f1f5f9;margin-top:8px;padding-top:8px">
+              <div style="display:flex;gap:8px">
+                <div class="tile" style="background:#f8fafc;flex:1;padding:8px">
+                  <div style="font-size:16px;font-weight:700;color:#0f3460">142</div>
+                  <div style="font-size:9px;color:#94a3b8">Custom Objects</div>
+                </div>
+                <div class="tile" style="background:#f8fafc;flex:1;padding:8px">
+                  <div style="font-size:16px;font-weight:700;color:#0f3460">38</div>
+                  <div style="font-size:9px;color:#94a3b8">Active Flows</div>
+                </div>
+                <div class="tile" style="background:#f8fafc;flex:1;padding:8px">
+                  <div style="font-size:16px;font-weight:700;color:#0f3460">67</div>
+                  <div style="font-size:9px;color:#94a3b8">Apex Classes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- PROJECT 2: MULTI-ORG SYNC -->
+<!-- ======================================================= -->
+<div class="project">
+  <div class="project-header">
+    <div class="proj-icon" style="background:#f0fdf4">🔄</div>
+    <div class="proj-meta">
+      <div class="proj-num" style="color:#065f46">Project 02</div>
+      <div class="proj-title">Multi-Org Data Sync Framework</div>
+      <div class="proj-subtitle">Real-time, conflict-aware record synchronisation across Salesforce orgs &mdash; zero middleware</div>
+      <a class="github-link" style="color:#065f46;border-color:#86efac;background:#f0fdf4" href="https://github.com/sf-sagarvyas/sf-multorg-sync-framework" target="_blank">
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="two-col">
+      <div>
+        <div class="section-label" style="color:#065f46">The Business Challenge</div>
+        <p class="body-text">Enterprises that grow through acquisitions or operate global-regional Salesforce architectures constantly wrestle with a painful question: how do you keep customer, product, or operational data in sync across multiple Salesforce orgs without expensive middleware platforms like MuleSoft or Informatica?</p>
+        <p class="body-text" style="margin-top:10px">Without a sync framework, teams maintain duplicate data manually, integrations break silently, and compliance teams struggle to maintain a single source of truth across entities.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#065f46">The Innovation</div>
+        <p class="body-text">This framework uses Salesforce Platform Events as a native message bus between orgs &mdash; no external tools, no per-message cost, no infrastructure to manage. It includes built-in conflict detection (last-write-wins with local modification check) and automatic retry with exponential backoff.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#065f46">Business Value</div>
+        <p class="body-text">Organisations that previously paid for middleware licences can replace point-to-point integrations with a governed, auditable sync layer that lives entirely inside Salesforce &mdash; reducing integration cost, improving data accuracy, and cutting sync latency from batch-hours to real-time seconds.</p>
+
+        <div style="margin-top:14px">
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Platform Events</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Conflict Resolution</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Retry Logic</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Full Audit Log</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="color:#065f46">How It Works</div>
+        <div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#065f46">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Multi-Org Sync &mdash; Live View</div>
+          </div>
+          <div class="mockup-body">
+            <div style="display:flex;gap:12px;margin-bottom:12px">
+              <div style="flex:1">
+                <div class="sync-box" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe">
+                  <div style="font-size:16px;margin-bottom:4px">🏢</div>
+                  SOURCE ORG<br><span style="font-size:9px;font-weight:400;opacity:0.7">HQ &mdash; Singapore</span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px">
+                <div style="font-size:9px;color:#94a3b8;text-align:center">RecordSyncEvent__e</div>
+                <div style="font-size:20px;color:#22c55e">⇄</div>
+                <div style="font-size:9px;color:#22c55e;font-weight:700">LIVE</div>
+              </div>
+              <div style="flex:1">
+                <div class="sync-box" style="background:#f0fdf4;color:#065f46;border:1px solid #86efac">
+                  <div style="font-size:16px;margin-bottom:4px">🏢</div>
+                  TARGET ORG<br><span style="font-size:9px;font-weight:400;opacity:0.7">Regional &mdash; EU</span>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">Sync Log</div>
+            <div class="table-header"><span style="flex:2">Record</span><span style="flex:1">Op</span><span style="flex:1">Status</span><span style="flex:1">Time</span></div>
+            <div class="table-row"><span style="flex:2">Account-0048</span><span style="flex:1;color:#065f46">UPDATE</span><span style="flex:1"><span class="status-pill s-approved">Synced</span></span><span style="flex:1;color:#94a3b8">0.3s</span></div>
+            <div class="table-row"><span style="flex:2">Contact-1192</span><span style="flex:1;color:#1e40af">INSERT</span><span style="status-pill s-approved" style="flex:1"><span class="status-pill s-approved">Synced</span></span><span style="flex:1;color:#94a3b8">0.5s</span></div>
+            <div class="table-row"><span style="flex:2">Opportunity-07</span><span style="flex:1;color:#92400e">UPDATE</span><span style="flex:1"><span class="status-pill s-pending">Conflict</span></span><span style="flex:1;color:#94a3b8">1.1s</span></div>
+            <div class="table-row"><span style="flex:2">Account-0052</span><span style="flex:1;color:#065f46">UPDATE</span><span style="flex:1"><span class="status-pill s-approved">Synced</span></span><span style="flex:1;color:#94a3b8">0.4s</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- PROJECT 3: CASE DEPENDENCY -->
+<!-- ======================================================= -->
+<div class="project">
+  <div class="project-header">
+    <div class="proj-icon" style="background:#fef9c3">🔗</div>
+    <div class="proj-meta">
+      <div class="proj-num" style="color:#92400e">Project 03</div>
+      <div class="proj-title">Case Dependency &amp; Blocking Chain Framework</div>
+      <div class="proj-subtitle">Service Cloud &mdash; the only solution that enforces case interdependencies natively in Salesforce</div>
+      <a class="github-link" style="color:#92400e;border-color:#fde68a;background:#fffbeb" href="https://github.com/sf-sagarvyas/sf-case-dependency-framework" target="_blank">
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="two-col">
+      <div>
+        <div class="section-label" style="color:#92400e">The Business Challenge</div>
+        <p class="body-text">In complex service environments &mdash; IT, telecom, manufacturing &mdash; one customer issue often blocks resolution of many others. A network outage creates 50 customer cases, all of which are stuck until the root cause is fixed. Salesforce has no native concept of case dependencies.</p>
+        <p class="body-text" style="margin-top:10px">Service agents waste time attempting to resolve cases they cannot close. Customers receive inaccurate status updates. Supervisors have no visibility into how many cases are blocked behind a single issue. SLA breach rates climb.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#92400e">The Innovation</div>
+        <p class="body-text">This solution introduces a many-to-many dependency model between Cases. When a "blocker" case is closed, the system automatically unblocks all downstream cases and notifies the respective agents by email &mdash; no manual coordination required. An embedded LWC shows the full dependency chain visually on every Case record.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#92400e">Business Value</div>
+        <p class="body-text">Service teams eliminate wasted effort on unresolvable cases. SLA compliance improves because agents focus only on cases they can actually close. Supervisors gain real-time visibility into systemic issues and their downstream blast radius.</p>
+
+        <div style="margin-top:14px">
+          <span class="tag" style="background:#fffbeb;color:#92400e">No OOTB equivalent</span>
+          <span class="tag" style="background:#fffbeb;color:#92400e">Auto cascade resolve</span>
+          <span class="tag" style="background:#fffbeb;color:#92400e">Agent notifications</span>
+          <span class="tag" style="background:#fffbeb;color:#92400e">Visual dependency tree</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="color:#92400e">Visual Dependency View</div>
+        <div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#92400e">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Case #00842 &mdash; Dependency Chain</div>
+          </div>
+          <div class="mockup-body">
+            <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px;margin-bottom:10px;font-size:11px;color:#92400e;font-weight:500">
+              ⚠️ This case is blocking <strong>4</strong> downstream cases. Resolve this to unblock them.
+            </div>
+            <div style="text-align:center;margin-bottom:8px">
+              <div class="dep-node dep-blocking" style="display:inline-block;padding:8px 20px">
+                Case #00842<br><span style="font-size:9px;font-weight:400">Network Outage &mdash; Root Cause</span>
+              </div>
+            </div>
+            <div class="dep-arrow">↓ blocks</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+              <div class="dep-node dep-blocked">
+                Case #00855<br><span style="font-size:9px;font-weight:400">No internet &mdash; Client A</span>
+              </div>
+              <div class="dep-node dep-blocked">
+                Case #00856<br><span style="font-size:9px;font-weight:400">No internet &mdash; Client B</span>
+              </div>
+              <div class="dep-node dep-blocked">
+                Case #00861<br><span style="font-size:9px;font-weight:400">VoIP down &mdash; Client C</span>
+              </div>
+              <div class="dep-node dep-free" style="border-style:dashed">
+                Case #00899<br><span style="font-size:9px;font-weight:400">✅ Resolved independently</span>
+              </div>
+            </div>
+            <div style="margin-top:10px;text-align:right">
+              <button style="background:#92400e;color:white;border:none;border-radius:5px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer">+ Add Dependency</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- PROJECT 4: DEALER AUDIT -->
+<!-- ======================================================= -->
+<div class="project">
+  <div class="project-header">
+    <div class="proj-icon" style="background:#fce7f3">🚢</div>
+    <div class="proj-meta">
+      <div class="proj-num" style="color:#9d174d">Project 04</div>
+      <div class="proj-title">Dealer Audit &amp; Service Level Framework</div>
+      <div class="proj-subtitle">End-to-end configurable dealership audit system with automated service level management and PDF reporting</div>
+      <a class="github-link" style="color:#9d174d;border-color:#f9a8d4;background:#fce7f3" href="https://github.com/sf-sagarvyas/sf-dealer-audit-framework" target="_blank">
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="two-col">
+      <div>
+        <div class="section-label" style="color:#9d174d">The Business Challenge</div>
+        <p class="body-text">Manufacturers with dealer or franchise networks need to regularly audit dealerships and tie the results to commercial consequences &mdash; specifically, how much of the service cost the manufacturer will absorb. Managing this with spreadsheets, emails, and manual scoring creates inconsistency, disputes, and delayed outcomes.</p>
+        <p class="body-text" style="margin-top:10px">There is no standard Salesforce product that handles configurable audit questionnaires, weighted scoring, automatic service level promotion and demotion, or formal PDF result communication &mdash; all in one place.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#9d174d">The Innovation</div>
+        <p class="body-text">A fully admin-configurable system &mdash; every service level, scoring threshold, question, and weightage is set by the business without code changes. Auditors use a mobile-friendly tabbed form with photo upload. The system tracks consecutive audit performance to promote or demote dealerships automatically after N consecutive passing or failing audits.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#9d174d">Business Value</div>
+        <p class="body-text">Manufacturers eliminate disputes through documented, weighted, evidence-backed audit results delivered as professional PDF reports. Dealerships receive transparent scoring with a structured re-audit appeal process. Service cost allocation is automated and traceable.</p>
+
+        <div style="margin-top:14px">
+          <span class="tag" style="background:#fce7f3;color:#9d174d">Weighted Scoring</span>
+          <span class="tag" style="background:#fce7f3;color:#9d174d">PDF Report Email</span>
+          <span class="tag" style="background:#fce7f3;color:#9d174d">Admin Dashboard</span>
+          <span class="tag" style="background:#fce7f3;color:#9d174d">Re-Audit Workflow</span>
+          <span class="tag" style="background:#fce7f3;color:#9d174d">Photo Evidence</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="color:#9d174d">Auditor Form + Admin Dashboard</div>
+        <div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#9d174d">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Audit Form &mdash; Galaxy Motors Dubai</div>
+          </div>
+          <div class="mockup-body">
+            <div style="background:#fce7f3;border:1px solid #f9a8d4;border-radius:6px;padding:6px 10px;margin-bottom:8px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+              <span style="color:#9d174d;font-weight:600">📷 Upload Photos</span>
+              <span style="background:#9d174d;color:white;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600">+ Add Files</span>
+            </div>
+            <div class="tab-row">
+              <div class="tab tab-active">Branding</div>
+              <div class="tab tab-inactive">Reception</div>
+              <div class="tab tab-inactive">Workshop</div>
+            </div>
+            <div class="q-row"><span>Brand banners properly displayed?</span><div class="yn-group"><span class="yn-yes">Yes</span><span class="yn-no">No</span></div></div>
+            <div class="q-row"><span>Fascia logo illuminated?</span><div class="yn-group"><span class="yn-yes">Yes</span><span class="yn-no">No</span></div></div>
+            <div class="q-row"><span>Promotional materials current?</span><div class="yn-group"><span class="yn-no" style="background:#fee2e2;color:#991b1b">Yes</span><span class="yn-yes">No</span></div></div>
+            <div style="margin-top:10px;background:#f8fafc;border-radius:6px;padding:8px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:#64748b">Projected score: <strong style="color:#065f46">82%</strong> → Platinum Level</span>
+              <button style="background:#9d174d;color:white;border:none;border-radius:5px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer">Submit Audit</button>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-wrap" style="margin-top:10px">
+          <div class="mockup-bar" style="background:#374151">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Admin Dashboard &mdash; Dealership Overview</div>
+          </div>
+          <div class="mockup-body">
+            <div style="display:flex;gap:6px;margin-bottom:10px">
+              <div class="tile" style="background:#f0fdf4;text-align:center;padding:8px">
+                <div style="font-size:16px;font-weight:700;color:#065f46">14</div>
+                <div style="font-size:9px;color:#166534">Platinum</div>
+              </div>
+              <div class="tile" style="background:#fffbeb;text-align:center;padding:8px">
+                <div style="font-size:16px;font-weight:700;color:#92400e">23</div>
+                <div style="font-size:9px;color:#78350f">Gold</div>
+              </div>
+              <div class="tile" style="background:#fef9c3;text-align:center;padding:8px">
+                <div style="font-size:16px;font-weight:700;color:#713f12">8</div>
+                <div style="font-size:9px;color:#713f12">Silver</div>
+              </div>
+              <div class="tile" style="background:#fce7f3;text-align:center;padding:8px">
+                <div style="font-size:16px;font-weight:700;color:#9d174d">3</div>
+                <div style="font-size:9px;color:#9d174d">Pending ✓</div>
+              </div>
+            </div>
+            <div class="table-header"><span style="flex:2">Dealership</span><span style="flex:1">Level</span><span style="flex:1">Score</span><span style="flex:1">Status</span></div>
+            <div class="table-row"><span style="flex:2">Galaxy Motors Dubai</span><span style="flex:1;color:#065f46;font-weight:700">Platinum</span><span style="flex:1">82%</span><span style="flex:1"><span class="status-pill s-pending">Pending ✓</span></span></div>
+            <div class="table-row"><span style="flex:2">AutoHub Riyadh</span><span style="flex:1;color:#92400e;font-weight:700">Gold</span><span style="flex:1">74%</span><span style="flex:1"><span class="status-pill s-approved">Approved</span></span></div>
+            <div class="table-row"><span style="flex:2">Marina Cars Doha</span><span style="flex:1;color:#713f12;font-weight:700">Silver</span><span style="flex:1">51%</span><span style="flex:1"><span class="status-pill s-demoted">Demoted</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PROJECT 5: SF AI INSIGHTS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="project">
+  <div class="project-header">
+    <div class="proj-icon" style="background:#f0fdf4">🤖</div>
+    <div class="proj-meta">
+      <div class="proj-num" style="color:#065f46">Project 05</div>
+      <div class="proj-title">SF AI Insights Reporter</div>
+      <div class="proj-subtitle">Ask a plain-English question, receive a rich AI-generated business report by email — entirely inside Salesforce</div>
+      <a class="github-link" style="color:#065f46;border-color:#86efac;background:#f0fdf4" href="https://github.com/sf-sagarvyas/sf-ai-insights" target="_blank">
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="two-col">
+      <div>
+        <div class="section-label" style="color:#065f46">The Business Challenge</div>
+        <p class="body-text">Business users need instant answers from Salesforce data but can't write SOQL and can't wait for IT to build reports. Standard reporting tools require pre-defined queries, rigid schemas, and BI expertise — none of which a sales manager or service director has time for.</p>
+        <p class="body-text" style="margin-top:10px">The only existing alternatives are expensive BI platforms with their own licensing, maintenance overhead, and data sync delays.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#065f46">The Innovation</div>
+        <p class="body-text">This solution makes Claude AI a live Salesforce data analyst. The user types a plain-English question, Claude generates and self-heals the SOQL, queries live data, then produces a full HTML report (charts, metric cards, data table) and emails it as an attachment — all within Salesforce, zero external infrastructure.</p>
+        <p class="body-text" style="margin-top:10px">A self-learning knowledge base records every successful and failed query pattern, making the system progressively more accurate with each report run.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#065f46">Business Value</div>
+        <div class="three-col" style="margin-top:0">
+          <div class="kpi" style="background:#f0fdf4">
+            <div class="kpi-value" style="color:#065f46">0</div>
+            <div class="kpi-label" style="color:#166534">External servers needed</div>
+          </div>
+          <div class="kpi" style="background:#eff6ff">
+            <div class="kpi-value" style="color:#1e40af">5-15</div>
+            <div class="kpi-label" style="color:#1e5fa8">Minutes to rich report</div>
+          </div>
+          <div class="kpi" style="background:#fffbeb">
+            <div class="kpi-value" style="color:#92400e">Self</div>
+            <div class="kpi-label" style="color:#78350f">Learning knowledge base</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Claude AI</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Queueable Apex</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">SOQL Auto-Healing</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">HTML Email Report</span>
+          <span class="tag" style="background:#f0fdf4;color:#065f46">Self-Learning KB</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="color:#065f46">User Experience</div>
+        <div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#065f46">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">AI Insights &mdash; Salesforce App</div>
+          </div>
+          <div class="mockup-body">
+            <div style="font-size:11px;font-weight:600;color:#0f3460;margin-bottom:6px">What would you like to know?</div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px;font-size:11px;color:#374151;margin-bottom:8px;min-height:50px">
+              Show me my team's open opportunities closing this quarter, sorted by amount
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <div style="flex:1;background:#eff6ff;border-radius:4px;padding:5px 8px;font-size:10px">
+                <div style="color:#64748b">Date Range</div>
+                <div style="font-weight:600;color:#1e40af">Current Quarter</div>
+              </div>
+              <div style="flex:1;background:#f0fdf4;border-radius:4px;padding:5px 8px;font-size:10px">
+                <div style="color:#64748b">Data Scope</div>
+                <div style="font-weight:600;color:#065f46">My team</div>
+              </div>
+            </div>
+            <button style="background:#065f46;color:white;border:none;border-radius:5px;padding:6px 14px;font-size:11px;font-weight:600;width:100%;cursor:pointer">Generate report</button>
+            <div style="margin-top:10px;border-top:1px solid #f1f5f9;padding-top:8px">
+              <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;margin-bottom:6px">Recent Reports</div>
+              <div class="table-row"><span style="flex:2;font-size:10px">Q3 Pipeline by Rep</span><span class="status-pill s-approved" style="font-size:9px">Sent</span></div>
+              <div class="table-row"><span style="flex:2;font-size:10px">Service Cases This Month</span><span class="status-pill s-pending" style="font-size:9px">Processing</span></div>
+              <div class="table-row"><span style="flex:2;font-size:10px">Account Health Overview</span><span class="status-pill s-approved" style="font-size:9px">Sent</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PROJECT 6: AI CODE ANALYZER -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="project">
+  <div class="project-header">
+    <div class="proj-icon" style="background:#f5f3ff">🔍</div>
+    <div class="proj-meta">
+      <div class="proj-num" style="color:#6d28d9">Project 06</div>
+      <div class="proj-title">AI Code Analyzer</div>
+      <div class="proj-subtitle">AI-powered Salesforce APEX &amp; LWC code reviewer with configurable guardrail rules, PMD static analysis, and streaming findings</div>
+      <a class="github-link" style="color:#6d28d9;border-color:#c4b5fd;background:#f5f3ff" href="https://github.com/sf-sagarvyas/ai-code-analyzer" target="_blank">
+        View on GitHub →
+      </a>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="two-col">
+      <div>
+        <div class="section-label" style="color:#6d28d9">The Business Challenge</div>
+        <p class="body-text">Salesforce teams accumulate technical debt faster than it can be reviewed. Manual code review is inconsistent — different reviewers catch different issues, guardrail standards get applied unevenly, and junior developers don't always know what "best practice" looks like for Apex bulkification, FLS checks, or LWC reactivity.</p>
+        <p class="body-text" style="margin-top:10px">PMD catches syntactic violations but misses semantic issues that require understanding of architecture, naming conventions, and intent.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#6d28d9">The Innovation</div>
+        <p class="body-text">A two-pass review engine: PMD runs deterministic static rules first, then Claude performs deep semantic review guided by a library of 70+ configurable guardrail rules organised by category (security, performance, architecture, naming, testing, governance, accessibility). Rules are authored in plain Markdown — any team member can add or modify them without touching code.</p>
+        <p class="body-text" style="margin-top:10px">Findings stream in real-time via Server-Sent Events. Each finding links to the exact code line with severity highlighting, rationale, and a concrete fix suggestion.</p>
+
+        <div class="divider"></div>
+
+        <div class="section-label" style="color:#6d28d9">Business Value</div>
+        <p class="body-text">Development teams get consistent, comprehensive code reviews in seconds rather than days. Senior engineers spend time mentoring rather than hunting for SOQL-in-loops violations. Guardrail rules encode institutional knowledge that persists beyond individual contributors.</p>
+
+        <div style="margin-top:14px">
+          <span class="tag" style="background:#f5f3ff;color:#6d28d9">Next.js 15</span>
+          <span class="tag" style="background:#f5f3ff;color:#6d28d9">Claude AI</span>
+          <span class="tag" style="background:#f5f3ff;color:#6d28d9">PMD Static Analysis</span>
+          <span class="tag" style="background:#f5f3ff;color:#6d28d9">Server-Sent Events</span>
+          <span class="tag" style="background:#f5f3ff;color:#6d28d9">70+ Guardrail Rules</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="color:#6d28d9">Live Review Dashboard</div>
+        <div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#6d28d9">
+            <div class="mockup-dot" style="background:#ef4444"></div>
+            <div class="mockup-dot" style="background:#f59e0b"></div>
+            <div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">AI Code Analyzer &mdash; Review Complete</div>
+          </div>
+          <div class="mockup-body">
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <div class="tile" style="background:#fce7f3;text-align:center;padding:8px">
+                <div style="font-size:18px;font-weight:700;color:#9d174d">C</div>
+                <div style="font-size:9px;color:#9d174d">Quality</div>
+              </div>
+              <div style="flex:3">
+                <div style="font-size:10px;font-weight:700;color:#475569;margin-bottom:5px;text-transform:uppercase">By Severity</div>
+                <div class="bar-row"><span style="width:65px;color:#374151;font-size:10px">Critical</span><div class="bar-track"><div class="bar-fill" style="width:20%;background:#ef4444"></div></div><span style="color:#ef4444;font-size:10px;width:20px;font-weight:700">2</span></div>
+                <div class="bar-row"><span style="width:65px;color:#374151;font-size:10px">High</span><div class="bar-track"><div class="bar-fill" style="width:45%;background:#f97316"></div></div><span style="color:#475569;font-size:10px;width:20px">4</span></div>
+                <div class="bar-row"><span style="width:65px;color:#374151;font-size:10px">Medium</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:#eab308"></div></div><span style="color:#475569;font-size:10px;width:20px">7</span></div>
+              </div>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;margin-bottom:4px">Top Findings</div>
+            <div style="background:#fee2e2;border-left:3px solid #ef4444;border-radius:0 4px 4px 0;padding:5px 7px;margin-bottom:4px;font-size:10px">
+              <div style="font-weight:700;color:#991b1b">APEX-PERF-002</div>
+              <div>DML inside for loop — risks LimitException at 150+ records</div>
+            </div>
+            <div style="background:#fff7ed;border-left:3px solid #f97316;border-radius:0 4px 4px 0;padding:5px 7px;margin-bottom:4px;font-size:10px">
+              <div style="font-weight:700;color:#9a3412">APEX-SEC-001</div>
+              <div>Missing WITH SECURITY_ENFORCED on SOQL query</div>
+            </div>
+            <div style="background:#fefce8;border-left:3px solid #eab308;border-radius:0 4px 4px 0;padding:5px 7px;font-size:10px">
+              <div style="font-weight:700;color:#854d0e">APEX-NAME-003</div>
+              <div>Method name 'doStuff' does not follow verb-noun convention</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  Built with Salesforce Platform • LWC • Apex • Platform Events • Visualforce • Next.js • Claude AI<br>
+  <a href="https://github.com/sf-sagarvyas" target="_blank">github.com/sf-sagarvyas</a> &nbsp;·&nbsp;
+  <a href="mailto:jsk.sagarvyas@gmail.com">jsk.sagarvyas@gmail.com</a>
+</div>
+
+</body>
+</html>
