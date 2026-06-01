@@ -632,12 +632,12 @@
             border-radius: 4px 4px 0 0;
             border: 2px solid #cdd6e4;
             position: relative; cursor: pointer;
-            /* edge-on stack: ~64° from viewer */
-            transform: rotateY(-64deg) rotateX(5deg);
+            /* angled face: ~45° so both face and spine are visible */
+            transform: rotateY(-46deg) rotateX(6deg);
             transform-origin: bottom center;
-            margin-left: -38px;
-            /* lighting gradient: darker spine, lighter face */
-            background-image: linear-gradient(to right, rgba(0,0,0,0.13) 0%, rgba(0,0,0,0.04) 30%, transparent 60%);
+            margin-left: -62px;
+            /* lighting: shadow on spine side, bright face */
+            background-image: linear-gradient(to right, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.06) 25%, transparent 55%);
             transition: transform 0.42s cubic-bezier(0.34,1.56,0.64,1),
                         background-color 0.28s ease,
                         background-image 0.3s ease,
@@ -672,8 +672,8 @@
         }
 
         .pcard:hover {
-            /* swing toward viewer + lift */
-            transform: rotateY(-12deg) rotateX(0deg) translateY(-65px);
+            /* swing fully toward viewer + lift */
+            transform: rotateY(-6deg) rotateX(0deg) translateY(-68px);
             background-color: var(--sf-blue) !important;
             background-image: none;          /* remove depth gradient when face-on */
             border-color: var(--sf-blue-dark);
