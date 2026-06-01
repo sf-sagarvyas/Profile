@@ -614,17 +614,25 @@
 
         .pile-scene {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: flex-end;
-            padding: 4rem 2rem 1.5rem;
+            padding: 4rem 0 1.5rem;
             perspective: 660px;
             perspective-origin: 50% 28%;
-            overflow: visible;
+            overflow-x: auto;
+            overflow-y: hidden;
+            max-width: 580px;
+            margin: 0 auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
         }
+        .pile-scene::-webkit-scrollbar { display: none; }
 
         .project-pile {
             display: flex; align-items: flex-end;
             transform-style: preserve-3d;
+            flex-shrink: 0;
+            padding: 0 2.5rem 0 1.5rem;
         }
 
         .pcard {
@@ -825,9 +833,9 @@
         .dep-arrow   { text-align:center; color:#94a3b8; font-size:18px; margin:4px 0; }
         .sync-box    { border-radius:8px; padding:10px; font-size:11px; font-weight:600; text-align:center; }
 
-        /* ─── PROJECTS MOBILE CAROUSEL ─────────────────── */
+        /* ─── PROJECTS CAROUSEL HINT ────────────────────── */
         .pile-hint {
-            display: none;
+            display: block;
             text-align: center;
             font-size: 0.72rem;
             color: var(--text-light);
@@ -836,30 +844,20 @@
             user-select: none;
         }
 
+        /* mobile: smaller cards, adjusted perspective origin */
         @media (max-width: 680px) {
             .pile-scene {
-                justify-content: flex-start;
-                overflow-x: auto;
-                overflow-y: hidden;
                 padding: 3.5rem 0 1.5rem;
-                scrollbar-width: none;
-                -webkit-overflow-scrolling: touch;
                 perspective-origin: 35% 28%;
             }
-            .pile-scene::-webkit-scrollbar { display: none; }
-
             .project-pile {
                 padding: 0 2.5rem 0 1.25rem;
-                flex-shrink: 0;
             }
-
             .pcard {
                 width: 138px;
                 height: 218px;
                 margin-left: -55px;
             }
-
-            .pile-hint { display: block; }
         }
 
         /* ─── EXPERTISE CARD ICON PULSE ─────────────────── */
@@ -1399,7 +1397,7 @@
 
             </div>
         </div>
-        <p class="pile-hint">&#8592;&nbsp;&nbsp;swipe to explore all 6 projects&nbsp;&nbsp;&#8594;</p>
+        <p class="pile-hint">&#8592;&nbsp;&nbsp;scroll to explore all 6 projects&nbsp;&nbsp;&#8594;</p>
     </div>
 
     <!-- Backdrop + modal (outside .container so fixed positioning works) -->
