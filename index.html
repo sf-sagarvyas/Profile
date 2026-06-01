@@ -616,27 +616,35 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            padding: 4rem 1rem 1.5rem;
-            perspective: 900px;
-            perspective-origin: 50% 60%;
+            padding: 4rem 2rem 1.5rem;
+            perspective: 660px;
+            perspective-origin: 50% 28%;
             overflow: visible;
         }
 
-        .project-pile { display: flex; align-items: flex-end; }
+        .project-pile {
+            display: flex; align-items: flex-end;
+            transform-style: preserve-3d;
+        }
 
         .pcard {
-            width: 158px; height: 265px;
+            width: 148px; height: 292px;
             border-radius: 4px 4px 0 0;
             border: 2px solid #cdd6e4;
             position: relative; cursor: pointer;
-            transform: rotateY(-21deg);
+            /* edge-on stack: ~64° from viewer */
+            transform: rotateY(-64deg) rotateX(5deg);
             transform-origin: bottom center;
-            margin-left: -78px;
-            transition: transform 0.32s cubic-bezier(0.34,1.56,0.64,1),
+            margin-left: -38px;
+            /* lighting gradient: darker spine, lighter face */
+            background-image: linear-gradient(to right, rgba(0,0,0,0.13) 0%, rgba(0,0,0,0.04) 30%, transparent 60%);
+            transition: transform 0.42s cubic-bezier(0.34,1.56,0.64,1),
                         background-color 0.28s ease,
+                        background-image 0.3s ease,
                         border-color 0.28s ease,
                         box-shadow 0.28s ease;
-            box-shadow: 4px 8px 22px rgba(0,0,0,0.09);
+            box-shadow: 6px 14px 32px rgba(0,0,0,0.14),
+                        inset -2px 0 6px rgba(0,0,0,0.06);
             overflow: hidden;
             user-select: none;
         }
@@ -656,17 +664,20 @@
             content: ''; position: absolute;
             top: -13px; left: 14px;
             width: 46px; height: 14px;
-            background: inherit;
+            background-color: inherit;   /* inherit color only — no gradient */
+            background-image: none;
             border: 2px solid #cdd6e4; border-bottom: none;
             border-radius: 4px 4px 0 0;
-            transition: background 0.28s ease, border-color 0.28s ease;
+            transition: background-color 0.28s ease, border-color 0.28s ease;
         }
 
         .pcard:hover {
-            transform: rotateY(-21deg) translateY(-52px);
+            /* swing toward viewer + lift */
+            transform: rotateY(-12deg) rotateX(0deg) translateY(-65px);
             background-color: var(--sf-blue) !important;
+            background-image: none;          /* remove depth gradient when face-on */
             border-color: var(--sf-blue-dark);
-            box-shadow: 0 26px 52px rgba(1,118,211,0.42);
+            box-shadow: 0 32px 64px rgba(1,118,211,0.42);
             z-index: 20;
         }
         .pcard:hover::before { border-color: var(--sf-blue-dark); }
@@ -689,7 +700,7 @@
         .pcard-peek {
             position: absolute; top: 16px; left: 14px; right: 14px;
             opacity: 0; pointer-events: none;
-            transition: opacity 0.22s ease 0.06s; color: #fff;
+            transition: opacity 0.22s ease 0.18s; color: #fff;
         }
         .pcard:hover .pcard-peek { opacity: 1; }
         .pcard-peek h3 { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.35rem; line-height: 1.3; }
