@@ -628,14 +628,14 @@
         }
 
         .pcard {
-            width: 148px; height: 292px;
+            width: 200px; height: 300px;
             border-radius: 4px 4px 0 0;
             border: 2px solid #cdd6e4;
             position: relative; cursor: pointer;
             /* angled face: ~45° so both face and spine are visible */
             transform: rotateY(-46deg) rotateX(6deg);
             transform-origin: bottom center;
-            margin-left: -62px;
+            margin-left: -88px;
             /* lighting: shadow on spine side, bright face */
             background-image: linear-gradient(to right, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.06) 25%, transparent 55%);
             transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
@@ -786,6 +786,40 @@
             font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
             letter-spacing: 1.8px; margin-bottom: 0.5rem;
         }
+
+        /* ─── PROJECT MOCKUP STYLES ────────────────────── */
+        .mockup-wrap { background:#f1f5f9; border-radius:12px; padding:16px; margin-top:4px; }
+        .mockup-bar  { background:#0f3460; border-radius:8px 8px 0 0; padding:8px 14px; display:flex; align-items:center; gap:6px; }
+        .mockup-dot  { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+        .mockup-title{ color:#fff; font-size:11px; font-weight:600; margin-left:8px; opacity:.9; }
+        .mockup-body { background:#fff; border-radius:0 0 8px 8px; padding:14px; border:1px solid #e2e8f0; border-top:none; }
+        .screen-row  { display:flex; gap:8px; margin-bottom:8px; }
+        .m-tile      { border-radius:6px; padding:10px 12px; flex:1; }
+        .bar-row     { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:11px; }
+        .bar-track   { flex:1; background:#f1f5f9; border-radius:4px; height:6px; overflow:hidden; }
+        .bar-fill    { height:100%; border-radius:4px; }
+        .score-circle{ width:70px; height:70px; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 8px; }
+        .score-num   { font-size:20px; font-weight:700; line-height:1; }
+        .score-lbl   { font-size:9px; font-weight:600; }
+        .m-tab-row   { display:flex; gap:2px; margin-bottom:10px; }
+        .m-tab       { padding:5px 10px; border-radius:6px; font-size:11px; font-weight:600; }
+        .m-tab-on    { background:#0f3460; color:#fff; }
+        .m-tab-off   { background:#f1f5f9; color:#64748b; }
+        .q-row       { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #f1f5f9; font-size:11px; }
+        .yn-yes      { background:#d1fae5; color:#065f46; padding:2px 8px; border-radius:4px; font-weight:600; font-size:10px; }
+        .yn-no       { background:#f1f5f9; color:#94a3b8; padding:2px 8px; border-radius:4px; font-weight:600; font-size:10px; }
+        .m-table-hd  { display:flex; gap:8px; padding:5px 0; border-bottom:2px solid #e2e8f0; font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase; }
+        .m-table-row { display:flex; gap:8px; padding:7px 0; border-bottom:1px solid #f8fafc; font-size:11px; align-items:center; }
+        .s-pill      { padding:2px 8px; border-radius:10px; font-size:10px; font-weight:700; }
+        .s-ok        { background:#d1fae5; color:#065f46; }
+        .s-warn      { background:#fef3c7; color:#92400e; }
+        .s-err       { background:#fee2e2; color:#991b1b; }
+        .dep-node    { border-radius:6px; padding:7px 10px; font-size:11px; font-weight:600; text-align:center; }
+        .dep-block   { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+        .dep-blocked { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; }
+        .dep-free    { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; }
+        .dep-arrow   { text-align:center; color:#94a3b8; font-size:18px; margin:4px 0; }
+        .sync-box    { border-radius:8px; padding:10px; font-size:11px; font-weight:600; text-align:center; }
 
         /* ─── EXPERTISE CARD ICON PULSE ─────────────────── */
         .exp-card:hover .exp-icon {
@@ -1478,6 +1512,121 @@
     }
 
     /* ── project pile ───────────────────────────────────── */
+    const M = {
+        p1: `<div class="mockup-wrap">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Org Health Dashboard</div>
+          </div>
+          <div class="mockup-body">
+            <div class="screen-row">
+              <div class="m-tile" style="background:#d1fae5;text-align:center">
+                <div class="score-circle" style="background:#0f3460">
+                  <div class="score-num" style="color:#fff">84</div><div class="score-lbl" style="color:rgba(255,255,255,.7)">/100</div>
+                </div>
+                <div style="font-size:10px;font-weight:700;color:#065f46">HEALTHY</div>
+              </div>
+              <div style="flex:2">
+                <div style="font-size:10px;font-weight:700;color:#475569;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Governor Limits</div>
+                <div class="bar-row"><span style="width:80px;color:#374151">Daily API</span><div class="bar-track"><div class="bar-fill" style="width:34%;background:#22c55e"></div></div><span style="color:#475569;width:28px">34%</span></div>
+                <div class="bar-row"><span style="width:80px;color:#374151">Async Apex</span><div class="bar-track"><div class="bar-fill" style="width:61%;background:#f59e0b"></div></div><span style="color:#475569;width:28px">61%</span></div>
+                <div class="bar-row"><span style="width:80px;color:#374151">Bulk API</span><div class="bar-track"><div class="bar-fill" style="width:12%;background:#22c55e"></div></div><span style="color:#475569;width:28px">12%</span></div>
+                <div class="bar-row"><span style="width:80px;color:#374151">Emails</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#ef4444"></div></div><span style="color:#ef4444;width:28px;font-weight:700">88%</span></div>
+              </div>
+            </div>
+            <div style="border-top:1px solid #f1f5f9;margin-top:8px;padding-top:8px;display:flex;gap:8px">
+              <div class="m-tile" style="background:#f8fafc;padding:8px;text-align:center"><div style="font-size:16px;font-weight:700;color:#0f3460">142</div><div style="font-size:9px;color:#94a3b8">Custom Objects</div></div>
+              <div class="m-tile" style="background:#f8fafc;padding:8px;text-align:center"><div style="font-size:16px;font-weight:700;color:#0f3460">38</div><div style="font-size:9px;color:#94a3b8">Active Flows</div></div>
+              <div class="m-tile" style="background:#f8fafc;padding:8px;text-align:center"><div style="font-size:16px;font-weight:700;color:#0f3460">67</div><div style="font-size:9px;color:#94a3b8">Apex Classes</div></div>
+            </div>
+          </div>
+        </div>`,
+
+        p2: `<div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#065f46">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Multi-Org Sync &mdash; Live View</div>
+          </div>
+          <div class="mockup-body">
+            <div style="display:flex;gap:12px;margin-bottom:12px">
+              <div style="flex:1"><div class="sync-box" style="background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe"><div style="font-size:16px;margin-bottom:4px">🏢</div>SOURCE ORG<br><span style="font-size:9px;font-weight:400;opacity:.7">HQ &mdash; Singapore</span></div></div>
+              <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px">
+                <div style="font-size:9px;color:#94a3b8;text-align:center">RecordSyncEvent__e</div>
+                <div style="font-size:22px;color:#22c55e">⇄</div>
+                <div style="font-size:9px;color:#22c55e;font-weight:700">LIVE</div>
+              </div>
+              <div style="flex:1"><div class="sync-box" style="background:#f0fdf4;color:#065f46;border:1px solid #86efac"><div style="font-size:16px;margin-bottom:4px">🏢</div>TARGET ORG<br><span style="font-size:9px;font-weight:400;opacity:.7">Regional &mdash; EU</span></div></div>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Sync Log</div>
+            <div class="m-table-hd"><span style="flex:2">Record</span><span style="flex:1">Op</span><span style="flex:1">Status</span><span style="flex:1">Time</span></div>
+            <div class="m-table-row"><span style="flex:2">Account-0048</span><span style="flex:1;color:#065f46">UPDATE</span><span style="flex:1"><span class="s-pill s-ok">Synced</span></span><span style="flex:1;color:#94a3b8">0.3s</span></div>
+            <div class="m-table-row"><span style="flex:2">Contact-1192</span><span style="flex:1;color:#1e40af">INSERT</span><span style="flex:1"><span class="s-pill s-ok">Synced</span></span><span style="flex:1;color:#94a3b8">0.5s</span></div>
+            <div class="m-table-row"><span style="flex:2">Opportunity-07</span><span style="flex:1;color:#92400e">UPDATE</span><span style="flex:1"><span class="s-pill s-warn">Conflict</span></span><span style="flex:1;color:#94a3b8">1.1s</span></div>
+            <div class="m-table-row"><span style="flex:2">Account-0052</span><span style="flex:1;color:#065f46">UPDATE</span><span style="flex:1"><span class="s-pill s-ok">Synced</span></span><span style="flex:1;color:#94a3b8">0.4s</span></div>
+          </div>
+        </div>`,
+
+        p3: `<div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#92400e">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Case #00842 &mdash; Dependency Chain</div>
+          </div>
+          <div class="mockup-body">
+            <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:8px;margin-bottom:10px;font-size:11px;color:#92400e;font-weight:500">
+              ⚠️ This case is blocking <strong>4</strong> downstream cases. Resolve this to unblock them.
+            </div>
+            <div style="text-align:center;margin-bottom:6px">
+              <div class="dep-node dep-block" style="display:inline-block;padding:8px 20px">Case #00842<br><span style="font-size:9px;font-weight:400">Network Outage &mdash; Root Cause</span></div>
+            </div>
+            <div class="dep-arrow">↓ blocks</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">
+              <div class="dep-node dep-blocked">Case #00855<br><span style="font-size:9px;font-weight:400">No internet &mdash; Client A</span></div>
+              <div class="dep-node dep-blocked">Case #00856<br><span style="font-size:9px;font-weight:400">No internet &mdash; Client B</span></div>
+              <div class="dep-node dep-blocked">Case #00861<br><span style="font-size:9px;font-weight:400">VoIP down &mdash; Client C</span></div>
+              <div class="dep-node dep-free" style="border-style:dashed">Case #00899<br><span style="font-size:9px;font-weight:400">✅ Resolved independently</span></div>
+            </div>
+          </div>
+        </div>`,
+
+        p4: `<div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#9d174d">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Audit Form &mdash; Galaxy Motors Dubai</div>
+          </div>
+          <div class="mockup-body">
+            <div style="background:#fce7f3;border:1px solid #f9a8d4;border-radius:6px;padding:6px 10px;margin-bottom:8px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+              <span style="color:#9d174d;font-weight:600">📷 Upload Photos</span>
+              <span style="background:#9d174d;color:#fff;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600">+ Add Files</span>
+            </div>
+            <div class="m-tab-row"><div class="m-tab m-tab-on">Branding</div><div class="m-tab m-tab-off">Reception</div><div class="m-tab m-tab-off">Workshop</div></div>
+            <div class="q-row"><span>Brand banners properly displayed?</span><div style="display:flex;gap:4px"><span class="yn-yes">Yes</span><span class="yn-no">No</span></div></div>
+            <div class="q-row"><span>Fascia logo illuminated?</span><div style="display:flex;gap:4px"><span class="yn-yes">Yes</span><span class="yn-no">No</span></div></div>
+            <div class="q-row"><span>Promotional materials current?</span><div style="display:flex;gap:4px"><span class="yn-no" style="background:#fee2e2;color:#991b1b">Yes</span><span class="yn-yes">No</span></div></div>
+            <div style="margin-top:10px;background:#f8fafc;border-radius:6px;padding:8px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:#64748b">Projected score: <strong style="color:#065f46">82%</strong> &rarr; Platinum Level</span>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-wrap" style="margin-top:10px">
+          <div class="mockup-bar" style="background:#374151">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">Admin Dashboard &mdash; Dealership Overview</div>
+          </div>
+          <div class="mockup-body">
+            <div style="display:flex;gap:6px;margin-bottom:10px">
+              <div class="m-tile" style="background:#f0fdf4;text-align:center;padding:8px"><div style="font-size:16px;font-weight:700;color:#065f46">14</div><div style="font-size:9px;color:#166534">Platinum</div></div>
+              <div class="m-tile" style="background:#fffbeb;text-align:center;padding:8px"><div style="font-size:16px;font-weight:700;color:#92400e">23</div><div style="font-size:9px;color:#78350f">Gold</div></div>
+              <div class="m-tile" style="background:#fef9c3;text-align:center;padding:8px"><div style="font-size:16px;font-weight:700;color:#713f12">8</div><div style="font-size:9px;color:#713f12">Silver</div></div>
+              <div class="m-tile" style="background:#fce7f3;text-align:center;padding:8px"><div style="font-size:16px;font-weight:700;color:#9d174d">3</div><div style="font-size:9px;color:#9d174d">Pending</div></div>
+            </div>
+            <div class="m-table-hd"><span style="flex:2">Dealership</span><span style="flex:1">Level</span><span style="flex:1">Score</span><span style="flex:1">Status</span></div>
+            <div class="m-table-row"><span style="flex:2">Galaxy Motors Dubai</span><span style="flex:1;color:#065f46;font-weight:700">Platinum</span><span style="flex:1">82%</span><span style="flex:1"><span class="s-pill s-warn">Pending ✓</span></span></div>
+            <div class="m-table-row"><span style="flex:2">AutoHub Riyadh</span><span style="flex:1;color:#92400e;font-weight:700">Gold</span><span style="flex:1">74%</span><span style="flex:1"><span class="s-pill s-ok">Approved</span></span></div>
+            <div class="m-table-row"><span style="flex:2">Marina Cars Doha</span><span style="flex:1;color:#713f12;font-weight:700">Silver</span><span style="flex:1">51%</span><span style="flex:1"><span class="s-pill s-err">Demoted</span></span></div>
+          </div>
+        </div>`
+    };
+
     const projectData = {
         1: {
             title: 'Salesforce Org Health Dashboard',
@@ -1488,7 +1637,8 @@
             innovation: 'A native LWC dashboard that queries the Tooling API and Limits API in real time, computing a composite health score across governor limits, metadata counts, and automation density. Historical snapshots track trends over time — no external tools, no per-query cost, 100% native Salesforce.',
             value: 'Admins get a single screen surfacing every critical metric with a composite health score and historical snapshots. Problems are caught before they become outages. Zero third-party licence required.',
             tags: ['LWC Dashboard', 'Tooling API', 'Limits API', 'Historical Snapshots', 'Apex', 'Native Salesforce'],
-            github: 'https://github.com/sf-sagarvyas/sf-org-health-dashboard'
+            github: 'https://github.com/sf-sagarvyas/sf-org-health-dashboard',
+            mockup: M.p1
         },
         2: {
             title: 'Multi-Org Data Sync Framework',
@@ -1499,7 +1649,8 @@
             innovation: 'Uses Salesforce Platform Events as a native message bus between orgs — no external tools, no infrastructure to manage. Includes built-in conflict detection using last-write-wins with local modification checks, and automatic retry with exponential backoff for failed syncs.',
             value: 'Organisations can replace point-to-point integrations with a governed, auditable sync layer that lives entirely inside Salesforce — reducing integration cost, improving data accuracy, and cutting sync latency from batch-hours to real-time seconds.',
             tags: ['Platform Events', 'Conflict Resolution', 'Retry + Backoff', 'Full Audit Log', 'Apex', 'Zero Middleware'],
-            github: 'https://github.com/sf-sagarvyas/sf-multorg-sync-framework'
+            github: 'https://github.com/sf-sagarvyas/sf-multorg-sync-framework',
+            mockup: M.p2
         },
         3: {
             title: 'Case Dependency & Blocking Chain',
@@ -1510,7 +1661,8 @@
             innovation: 'Introduces a many-to-many dependency model between Cases. When a blocker case is closed, the system automatically unblocks all downstream cases and notifies respective agents by email — no manual coordination. An embedded LWC component shows the full dependency chain visually on every Case record.',
             value: 'Service teams eliminate wasted effort on unresolvable cases. SLA compliance improves as agents focus only on cases they can actually close. Supervisors gain real-time visibility into systemic issues and their downstream blast radius.',
             tags: ['Service Cloud', 'No OOTB Equivalent', 'Auto Cascade Resolve', 'Agent Notifications', 'LWC Dependency Tree', 'Apex'],
-            github: 'https://github.com/sf-sagarvyas/sf-case-dependency-framework'
+            github: 'https://github.com/sf-sagarvyas/sf-case-dependency-framework',
+            mockup: M.p3
         },
         4: {
             title: 'Dealer Audit & Service Level Framework',
@@ -1521,7 +1673,8 @@
             innovation: 'A fully admin-configurable system — every service level, scoring threshold, question, and weightage is set by the business without code changes. Auditors use a mobile-friendly tabbed form with photo upload. The system tracks consecutive audit performance to automatically promote or demote dealerships after N passing or failing audits.',
             value: 'Manufacturers eliminate disputes through documented, weighted, evidence-backed audit results delivered as professional PDF reports. Service cost allocation is automated and traceable. Dealerships receive transparent scoring with a structured re-audit appeal process.',
             tags: ['Weighted Scoring', 'PDF Report Email', 'Admin Dashboard', 'Re-Audit Workflow', 'Photo Evidence', 'Apex + VF'],
-            github: 'https://github.com/sf-sagarvyas/sf-dealer-audit-framework'
+            github: 'https://github.com/sf-sagarvyas/sf-dealer-audit-framework',
+            mockup: M.p4
         }
     };
 
@@ -1545,7 +1698,10 @@
                 <hr class="proj-divider">
                 <p class="proj-section-lbl" style="color:#b45309">Business Value</p>
                 <p>${p.value}</p>
-                <div class="proj-modal-tags" style="margin-top:1.25rem">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+                <hr class="proj-divider">
+                <p class="proj-section-lbl" style="color:#6b21a8">Preview</p>
+                ${p.mockup}
+                <div class="proj-modal-tags" style="margin-top:1.5rem">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
                 <a href="${p.github}" class="btn btn-blue" target="_blank" rel="noopener" style="margin-top:1.25rem;display:inline-flex;">
                     <i class="fab fa-github"></i> View on GitHub
                 </a>
