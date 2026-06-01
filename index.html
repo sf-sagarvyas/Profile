@@ -652,12 +652,16 @@
         .pcard:nth-child(1) { z-index: 1; background: #e8eef8; }
         .pcard:nth-child(2) { z-index: 2; background: #ecf3f8; }
         .pcard:nth-child(3) { z-index: 3; background: #f2f6fb; }
-        .pcard:nth-child(4) { z-index: 4; background: #f8fbfe; }
+        .pcard:nth-child(4) { z-index: 4; background: #f5fbf7; }
+        .pcard:nth-child(5) { z-index: 5; background: #f8fbfe; }
+        .pcard:nth-child(6) { z-index: 6; background: #fbf9fe; }
         /* per-project hover accent */
         .pcard:nth-child(1):hover { background-color: #1d4ed8 !important; border-color: #1e3a8a; box-shadow: 0 26px 52px rgba(29,78,216,0.4); }
         .pcard:nth-child(2):hover { background-color: #047857 !important; border-color: #064e3b; box-shadow: 0 26px 52px rgba(4,120,87,0.4); }
         .pcard:nth-child(3):hover { background-color: #b45309 !important; border-color: #78350f; box-shadow: 0 26px 52px rgba(180,83,9,0.4); }
         .pcard:nth-child(4):hover { background-color: #be185d !important; border-color: #831843; box-shadow: 0 26px 52px rgba(190,24,93,0.4); }
+        .pcard:nth-child(5):hover { background-color: #0d9488 !important; border-color: #0f766e; box-shadow: 0 26px 52px rgba(13,148,136,0.4); }
+        .pcard:nth-child(6):hover { background-color: #6d28d9 !important; border-color: #5b21b6; box-shadow: 0 26px 52px rgba(109,40,217,0.4); }
 
         /* folder tab */
         .pcard::before {
@@ -1338,6 +1342,24 @@
                     <span class="pcard-num">04</span>
                 </div>
 
+                <div class="pcard" onclick="openProject(5)">
+                    <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
+                    <div class="pcard-peek">
+                        <h3>SF AI Insights Reporter</h3>
+                        <p>Plain-English questions → AI-generated reports emailed from Salesforce.</p>
+                    </div>
+                    <span class="pcard-num">05</span>
+                </div>
+
+                <div class="pcard" onclick="openProject(6)">
+                    <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
+                    <div class="pcard-peek">
+                        <h3>AI Code Analyzer</h3>
+                        <p>Two-pass Apex &amp; LWC review with 70+ configurable guardrail rules.</p>
+                    </div>
+                    <span class="pcard-num">06</span>
+                </div>
+
             </div>
         </div>
     </div>
@@ -1588,6 +1610,64 @@
           </div>
         </div>`,
 
+        p5: `<div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#065f46">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">AI Insights &mdash; Salesforce App</div>
+          </div>
+          <div class="mockup-body">
+            <div style="font-size:11px;font-weight:600;color:#0f3460;margin-bottom:6px">What would you like to know?</div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:8px;font-size:11px;color:#374151;margin-bottom:8px;min-height:44px">
+              Show me my team's open opportunities closing this quarter, sorted by amount
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <div style="flex:1;background:#eff6ff;border-radius:4px;padding:5px 8px;font-size:10px"><div style="color:#64748b">Date Range</div><div style="font-weight:600;color:#1e40af">Current Quarter</div></div>
+              <div style="flex:1;background:#f0fdf4;border-radius:4px;padding:5px 8px;font-size:10px"><div style="color:#64748b">Data Scope</div><div style="font-weight:600;color:#065f46">My team</div></div>
+            </div>
+            <button style="background:#065f46;color:#fff;border:none;border-radius:5px;padding:6px 14px;font-size:11px;font-weight:600;width:100%;cursor:pointer">Generate report</button>
+            <div style="margin-top:10px;border-top:1px solid #f1f5f9;padding-top:8px">
+              <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;margin-bottom:6px">Recent Reports</div>
+              <div class="m-table-row"><span style="flex:2;font-size:10px">Q3 Pipeline by Rep</span><span class="s-pill s-ok" style="font-size:9px">Sent</span></div>
+              <div class="m-table-row"><span style="flex:2;font-size:10px">Service Cases This Month</span><span class="s-pill s-warn" style="font-size:9px">Processing</span></div>
+              <div class="m-table-row"><span style="flex:2;font-size:10px">Account Health Overview</span><span class="s-pill s-ok" style="font-size:9px">Sent</span></div>
+            </div>
+          </div>
+        </div>`,
+
+        p6: `<div class="mockup-wrap">
+          <div class="mockup-bar" style="background:#6d28d9">
+            <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
+            <div class="mockup-title">AI Code Analyzer &mdash; Review Complete</div>
+          </div>
+          <div class="mockup-body">
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              <div class="m-tile" style="background:#fce7f3;text-align:center;padding:8px">
+                <div style="font-size:18px;font-weight:700;color:#9d174d">C</div>
+                <div style="font-size:9px;color:#9d174d">Quality</div>
+              </div>
+              <div style="flex:3">
+                <div style="font-size:10px;font-weight:700;color:#475569;margin-bottom:5px;text-transform:uppercase">By Severity</div>
+                <div class="bar-row"><span style="width:60px;color:#374151;font-size:10px">Critical</span><div class="bar-track"><div class="bar-fill" style="width:20%;background:#ef4444"></div></div><span style="color:#ef4444;font-size:10px;width:18px;font-weight:700">2</span></div>
+                <div class="bar-row"><span style="width:60px;color:#374151;font-size:10px">High</span><div class="bar-track"><div class="bar-fill" style="width:45%;background:#f97316"></div></div><span style="color:#475569;font-size:10px;width:18px">4</span></div>
+                <div class="bar-row"><span style="width:60px;color:#374151;font-size:10px">Medium</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:#eab308"></div></div><span style="color:#475569;font-size:10px;width:18px">7</span></div>
+              </div>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:#475569;text-transform:uppercase;margin-bottom:4px">Top Findings</div>
+            <div style="background:#fee2e2;border-left:3px solid #ef4444;border-radius:0 4px 4px 0;padding:5px 7px;margin-bottom:4px;font-size:10px">
+              <div style="font-weight:700;color:#991b1b">APEX-PERF-002</div>
+              <div>DML inside for loop &mdash; risks LimitException at 150+ records</div>
+            </div>
+            <div style="background:#fff7ed;border-left:3px solid #f97316;border-radius:0 4px 4px 0;padding:5px 7px;margin-bottom:4px;font-size:10px">
+              <div style="font-weight:700;color:#9a3412">APEX-SEC-001</div>
+              <div>Missing WITH SECURITY_ENFORCED on SOQL query</div>
+            </div>
+            <div style="background:#fefce8;border-left:3px solid #eab308;border-radius:0 4px 4px 0;padding:5px 7px;font-size:10px">
+              <div style="font-weight:700;color:#854d0e">APEX-NAME-003</div>
+              <div>Method name 'doStuff' does not follow verb-noun convention</div>
+            </div>
+          </div>
+        </div>`,
+
         p4: `<div class="mockup-wrap">
           <div class="mockup-bar" style="background:#9d174d">
             <div class="mockup-dot" style="background:#ef4444"></div><div class="mockup-dot" style="background:#f59e0b"></div><div class="mockup-dot" style="background:#22c55e"></div>
@@ -1675,6 +1755,30 @@
             tags: ['Weighted Scoring', 'PDF Report Email', 'Admin Dashboard', 'Re-Audit Workflow', 'Photo Evidence', 'Apex + VF'],
             github: 'https://github.com/sf-sagarvyas/sf-dealer-audit-framework',
             mockup: M.p4
+        },
+        5: {
+            title: 'SF AI Insights Reporter',
+            icon: '🤖',
+            color: 'linear-gradient(135deg,#065f46,#0d9488)',
+            tagline: 'Ask a plain-English question, receive a rich AI-generated business report by email — entirely inside Salesforce',
+            challenge: 'Business users need instant answers from Salesforce data but can\'t write SOQL and can\'t wait for IT to build reports. Standard reporting tools require pre-defined queries, rigid schemas, and BI expertise. The only existing alternatives are expensive BI platforms with their own licensing, maintenance overhead, and data sync delays.',
+            innovation: 'Claude AI acts as a live Salesforce data analyst. The user types a plain-English question, Claude generates and self-heals the SOQL, queries live data, then produces a full HTML report with charts, metric cards, and a data table — emailed as an attachment, all within Salesforce with zero external infrastructure. A self-learning knowledge base records every successful and failed query pattern, making the system progressively more accurate with each run.',
+            value: '0 external servers needed. Business users get rich, formatted reports in 5–15 minutes from a plain-English question. A self-learning knowledge base means the system gets smarter with every report — no developer involvement required.',
+            tags: ['Claude AI', 'Queueable Apex', 'SOQL Auto-Healing', 'HTML Email Report', 'Self-Learning KB', 'Native Salesforce'],
+            github: 'https://github.com/sf-sagarvyas/sf-ai-insights',
+            mockup: M.p5
+        },
+        6: {
+            title: 'AI Code Analyzer',
+            icon: '🔍',
+            color: 'linear-gradient(135deg,#4c1d95,#6d28d9)',
+            tagline: 'AI-powered Salesforce Apex & LWC code reviewer with configurable guardrail rules, PMD static analysis, and streaming findings',
+            challenge: 'Salesforce teams accumulate technical debt faster than it can be reviewed. Manual code review is inconsistent — different reviewers catch different issues, guardrail standards get applied unevenly, and junior developers don\'t always know what best practice looks like for Apex bulkification, FLS checks, or LWC reactivity. PMD catches syntactic violations but misses semantic issues that require understanding of architecture, naming conventions, and intent.',
+            innovation: 'A two-pass review engine: PMD runs deterministic static rules first, then Claude performs deep semantic review guided by a library of 70+ configurable guardrail rules organised by category — security, performance, architecture, naming, testing, governance, accessibility. Rules are authored in plain Markdown so any team member can add or modify them without touching code. Findings stream in real-time via Server-Sent Events, each linking to the exact code line with severity, rationale, and a concrete fix suggestion.',
+            value: 'Development teams get consistent, comprehensive code reviews in seconds rather than days. Senior engineers spend time mentoring rather than hunting for SOQL-in-loops violations. Guardrail rules encode institutional knowledge that persists beyond individual contributors.',
+            tags: ['Next.js 15', 'Claude AI', 'PMD Static Analysis', 'Server-Sent Events', '70+ Guardrail Rules', 'Apex + LWC'],
+            github: 'https://github.com/sf-sagarvyas/ai-code-analyzer',
+            mockup: M.p6
         }
     };
 
