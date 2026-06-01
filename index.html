@@ -642,10 +642,14 @@
         }
         .pcard:first-child { margin-left: 0; }
         .pcard:nth-child(1) { z-index: 1; background: #e8eef8; }
-        .pcard:nth-child(2) { z-index: 2; background: #edf2fa; }
-        .pcard:nth-child(3) { z-index: 3; background: #f1f5fb; }
-        .pcard:nth-child(4) { z-index: 4; background: #f5f8fd; }
-        .pcard:nth-child(5) { z-index: 5; background: #f9fbfe; }
+        .pcard:nth-child(2) { z-index: 2; background: #ecf3f8; }
+        .pcard:nth-child(3) { z-index: 3; background: #f2f6fb; }
+        .pcard:nth-child(4) { z-index: 4; background: #f8fbfe; }
+        /* per-project hover accent */
+        .pcard:nth-child(1):hover { background-color: #1d4ed8 !important; border-color: #1e3a8a; box-shadow: 0 26px 52px rgba(29,78,216,0.4); }
+        .pcard:nth-child(2):hover { background-color: #047857 !important; border-color: #064e3b; box-shadow: 0 26px 52px rgba(4,120,87,0.4); }
+        .pcard:nth-child(3):hover { background-color: #b45309 !important; border-color: #78350f; box-shadow: 0 26px 52px rgba(180,83,9,0.4); }
+        .pcard:nth-child(4):hover { background-color: #be185d !important; border-color: #831843; box-shadow: 0 26px 52px rgba(190,24,93,0.4); }
 
         /* folder tab */
         .pcard::before {
@@ -755,6 +759,24 @@
             font-size: 0.78rem; font-weight: 500;
         }
         .proj-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+        /* modal colored header */
+        .proj-modal-hd {
+            padding: 1.75rem 2rem 1.5rem;
+            display: flex; align-items: flex-start; gap: 1rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .proj-modal-hd-icon {
+            font-size: 1.75rem; width: 52px; height: 52px; flex-shrink: 0;
+            border-radius: 12px; background: rgba(255,255,255,0.18);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .proj-modal-hd h2 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.2rem; line-height: 1.2; }
+        .proj-modal-hd .proj-tagline { color: rgba(255,255,255,0.8); font-size: 0.82rem; font-weight: 500; margin: 0; }
+        .proj-section-lbl {
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.8px; margin-bottom: 0.5rem;
+        }
 
         /* ─── EXPERTISE CARD ICON PULSE ─────────────────── */
         .exp-card:hover .exp-icon {
@@ -1240,8 +1262,8 @@
                 <div class="pcard reveal" onclick="openProject(1)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
-                        <h3>Project 1</h3>
-                        <p>Details coming soon from GitHub.</p>
+                        <h3>Org Health Dashboard</h3>
+                        <p>Real-time org monitoring &amp; health scoring — no third-party tools.</p>
                     </div>
                     <span class="pcard-num">01</span>
                 </div>
@@ -1249,8 +1271,8 @@
                 <div class="pcard reveal" onclick="openProject(2)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
-                        <h3>Project 2</h3>
-                        <p>Details coming soon from GitHub.</p>
+                        <h3>Multi-Org Sync Framework</h3>
+                        <p>Conflict-aware record sync across orgs — zero middleware.</p>
                     </div>
                     <span class="pcard-num">02</span>
                 </div>
@@ -1258,8 +1280,8 @@
                 <div class="pcard reveal" onclick="openProject(3)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
-                        <h3>Project 3</h3>
-                        <p>Details coming soon from GitHub.</p>
+                        <h3>Case Dependency Chain</h3>
+                        <p>Native case interdependencies in Service Cloud.</p>
                     </div>
                     <span class="pcard-num">03</span>
                 </div>
@@ -1267,19 +1289,10 @@
                 <div class="pcard reveal" onclick="openProject(4)">
                     <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="pcard-peek">
-                        <h3>Project 4</h3>
-                        <p>Details coming soon from GitHub.</p>
+                        <h3>Dealer Audit Framework</h3>
+                        <p>Configurable audits with automated service level management.</p>
                     </div>
                     <span class="pcard-num">04</span>
-                </div>
-
-                <div class="pcard reveal" onclick="openProject(5)">
-                    <div class="pcard-lines"><span></span><span></span><span></span><span></span><span></span></div>
-                    <div class="pcard-peek">
-                        <h3>Project 5</h3>
-                        <p>Details coming soon from GitHub.</p>
-                    </div>
-                    <span class="pcard-num">05</span>
                 </div>
 
             </div>
@@ -1458,39 +1471,48 @@
     /* ── project pile ───────────────────────────────────── */
     const projectData = {
         1: {
-            title: 'Project 1',
-            tagline: 'Placeholder — details to be added from GitHub',
-            desc: 'Full project details will be added soon. This card is a placeholder that will be updated with a complete description, technical highlights, architecture decisions, and lessons learned from the actual GitHub repository.',
-            tags: ['Salesforce', 'Apex', 'LWC', 'Flow Automation'],
-            github: 'https://github.com/sf-sagarvyas'
+            title: 'Salesforce Org Health Dashboard',
+            icon: '📊',
+            color: 'linear-gradient(135deg,#1e3a8a,#1d4ed8)',
+            tagline: 'Real-time org monitoring & health scoring — no third-party tools required',
+            challenge: 'Salesforce administrators at large organisations have no built-in, centralised way to monitor their org\'s health in real time. They typically discover issues — API limits hit, runaway flows, orphaned automations — only after something breaks in production, costing hours of incident recovery and impacting business operations. Teams resort to expensive third-party monitoring tools or manual checks across disparate screens.',
+            innovation: 'A native LWC dashboard that queries the Tooling API and Limits API in real time, computing a composite health score across governor limits, metadata counts, and automation density. Historical snapshots track trends over time — no external tools, no per-query cost, 100% native Salesforce.',
+            value: 'Admins get a single screen surfacing every critical metric with a composite health score and historical snapshots. Problems are caught before they become outages. Zero third-party licence required.',
+            tags: ['LWC Dashboard', 'Tooling API', 'Limits API', 'Historical Snapshots', 'Apex', 'Native Salesforce'],
+            github: 'https://github.com/sf-sagarvyas/sf-org-health-dashboard'
         },
         2: {
-            title: 'Project 2',
-            tagline: 'Placeholder — details to be added from GitHub',
-            desc: 'Full project details will be added soon. This card is a placeholder that will be updated with a complete description, technical highlights, architecture decisions, and lessons learned from the actual GitHub repository.',
-            tags: ['AI', 'Claude Code', 'Salesforce', 'JavaScript'],
-            github: 'https://github.com/sf-sagarvyas'
+            title: 'Multi-Org Data Sync Framework',
+            icon: '🔄',
+            color: 'linear-gradient(135deg,#064e3b,#047857)',
+            tagline: 'Real-time, conflict-aware record synchronisation across Salesforce orgs — zero middleware',
+            challenge: 'Enterprises that grow through acquisitions or operate global-regional Salesforce architectures constantly wrestle with keeping customer, product, or operational data in sync across multiple orgs — without expensive middleware platforms like MuleSoft or Informatica. Without a sync framework, teams maintain duplicate data manually, integrations break silently, and compliance teams struggle to maintain a single source of truth.',
+            innovation: 'Uses Salesforce Platform Events as a native message bus between orgs — no external tools, no infrastructure to manage. Includes built-in conflict detection using last-write-wins with local modification checks, and automatic retry with exponential backoff for failed syncs.',
+            value: 'Organisations can replace point-to-point integrations with a governed, auditable sync layer that lives entirely inside Salesforce — reducing integration cost, improving data accuracy, and cutting sync latency from batch-hours to real-time seconds.',
+            tags: ['Platform Events', 'Conflict Resolution', 'Retry + Backoff', 'Full Audit Log', 'Apex', 'Zero Middleware'],
+            github: 'https://github.com/sf-sagarvyas/sf-multorg-sync-framework'
         },
         3: {
-            title: 'Project 3',
-            tagline: 'Placeholder — details to be added from GitHub',
-            desc: 'Full project details will be added soon. This card is a placeholder that will be updated with a complete description, technical highlights, architecture decisions, and lessons learned from the actual GitHub repository.',
-            tags: ['Field Service', 'Apex', 'REST API', 'Automation'],
-            github: 'https://github.com/sf-sagarvyas'
+            title: 'Case Dependency & Blocking Chain',
+            icon: '🔗',
+            color: 'linear-gradient(135deg,#78350f,#b45309)',
+            tagline: 'The only solution that enforces case interdependencies natively in Salesforce Service Cloud',
+            challenge: 'In complex service environments — IT, telecom, manufacturing — one customer issue often blocks resolution of many others. A network outage creates 50 customer cases stuck until the root cause is fixed. Salesforce has no native concept of case dependencies, so agents waste time on unresolvable cases, customers receive inaccurate updates, and SLA breach rates climb.',
+            innovation: 'Introduces a many-to-many dependency model between Cases. When a blocker case is closed, the system automatically unblocks all downstream cases and notifies respective agents by email — no manual coordination. An embedded LWC component shows the full dependency chain visually on every Case record.',
+            value: 'Service teams eliminate wasted effort on unresolvable cases. SLA compliance improves as agents focus only on cases they can actually close. Supervisors gain real-time visibility into systemic issues and their downstream blast radius.',
+            tags: ['Service Cloud', 'No OOTB Equivalent', 'Auto Cascade Resolve', 'Agent Notifications', 'LWC Dependency Tree', 'Apex'],
+            github: 'https://github.com/sf-sagarvyas/sf-case-dependency-framework'
         },
         4: {
-            title: 'Project 4',
-            tagline: 'Placeholder — details to be added from GitHub',
-            desc: 'Full project details will be added soon. This card is a placeholder that will be updated with a complete description, technical highlights, architecture decisions, and lessons learned from the actual GitHub repository.',
-            tags: ['AgentForce', 'Einstein AI', 'Salesforce', 'LWC'],
-            github: 'https://github.com/sf-sagarvyas'
-        },
-        5: {
-            title: 'Project 5',
-            tagline: 'Placeholder — details to be added from GitHub',
-            desc: 'Full project details will be added soon. This card is a placeholder that will be updated with a complete description, technical highlights, architecture decisions, and lessons learned from the actual GitHub repository.',
-            tags: ['Experience Cloud', 'Salesforce', 'Integration', 'Flow'],
-            github: 'https://github.com/sf-sagarvyas'
+            title: 'Dealer Audit & Service Level Framework',
+            icon: '🚢',
+            color: 'linear-gradient(135deg,#831843,#be185d)',
+            tagline: 'Configurable dealership audit system with automated service level management and PDF reporting',
+            challenge: 'Manufacturers with dealer or franchise networks need to audit dealerships and tie results to commercial consequences — specifically how much service cost the manufacturer absorbs. Managing this with spreadsheets and emails creates inconsistency, disputes, and delayed outcomes. No standard Salesforce product handles configurable weighted scoring and automatic service level promotion/demotion.',
+            innovation: 'A fully admin-configurable system — every service level, scoring threshold, question, and weightage is set by the business without code changes. Auditors use a mobile-friendly tabbed form with photo upload. The system tracks consecutive audit performance to automatically promote or demote dealerships after N passing or failing audits.',
+            value: 'Manufacturers eliminate disputes through documented, weighted, evidence-backed audit results delivered as professional PDF reports. Service cost allocation is automated and traceable. Dealerships receive transparent scoring with a structured re-audit appeal process.',
+            tags: ['Weighted Scoring', 'PDF Report Email', 'Admin Dashboard', 'Re-Audit Workflow', 'Photo Evidence', 'Apex + VF'],
+            github: 'https://github.com/sf-sagarvyas/sf-dealer-audit-framework'
         }
     };
 
@@ -1498,14 +1520,27 @@
         const p = projectData[id];
         const body = document.getElementById('projModalBody');
         body.innerHTML = `
-            <h2>${p.title}</h2>
-            <p class="proj-tagline">${p.tagline}</p>
-            <hr class="proj-divider">
-            <p>${p.desc}</p>
-            <div class="proj-modal-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
-            <a href="${p.github}" class="btn btn-blue" target="_blank" rel="noopener" style="margin-top:0.5rem;">
-                <i class="fab fa-github"></i> View on GitHub
-            </a>
+            <div class="proj-modal-hd" style="background:${p.color}">
+                <div class="proj-modal-hd-icon">${p.icon}</div>
+                <div style="flex:1;min-width:0;">
+                    <h2>${p.title}</h2>
+                    <p class="proj-tagline">${p.tagline}</p>
+                </div>
+            </div>
+            <div class="proj-modal-body">
+                <p class="proj-section-lbl" style="color:#1d4ed8">The Business Challenge</p>
+                <p>${p.challenge}</p>
+                <hr class="proj-divider">
+                <p class="proj-section-lbl" style="color:#047857">The Innovation</p>
+                <p>${p.innovation}</p>
+                <hr class="proj-divider">
+                <p class="proj-section-lbl" style="color:#b45309">Business Value</p>
+                <p>${p.value}</p>
+                <div class="proj-modal-tags" style="margin-top:1.25rem">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+                <a href="${p.github}" class="btn btn-blue" target="_blank" rel="noopener" style="margin-top:1.25rem;display:inline-flex;">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </div>
         `;
         const overlay = document.getElementById('projOverlay');
         const modal   = document.getElementById('projModal');
